@@ -6,6 +6,7 @@
          Janakiraman
       </title>
       <script src="https://cdn.tailwindcss.com"></script>
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Caveat:wght@400..700&family=Moirai+One&family=Rubik+Scribble&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
@@ -34,8 +35,12 @@
             font-weight: 400;
             font-style: normal;
          }
-
-
+         .flex-reverse{
+            flex-direction: row-reverse;
+         }
+         .d-none{
+            display: none;
+         }
          .multiply-blend{
             mix-blend-mode: soft-light;
          }
@@ -89,6 +94,15 @@
          .intro-glimpse span:hover{
             filter: unset;
          }
+         label svg{
+            transition: .3s;
+         }
+         input[name="rating"]:checked ~ label svg{
+            color:#1f1f55 !important;
+            stroke: white;
+            transition: .3s;
+            transform: rotate(45deg);
+         }
       </style>
    </head>
    <body class="bg-black text-white">
@@ -96,7 +110,7 @@
          <!-- Header Section -->
          <div class="boxvel flex flex-col md:flex-row items-center justify-between p-6 rounded-lg mb-8">
             <div class="flex items-center space-x-4">
-               <img alt="Profile picture" class="rounded-full" height="50" src="img/profile.png" width="50"/>
+               <img alt="Profile picture" class="rounded-full" height="50" src="profile.jpeg" width="50"/>
                <div>
                   <h1 class="text-xl font-bold audiowide-regular">
                      Hey, I'm Janakiraman.
@@ -608,38 +622,43 @@
                <h2 class="text-3xl font-semibold text-center">Your opinion matters!</h2>
                <div class="flex flex-col items-center py-6 space-y-3">
                   <span class="text-center">How was your experience?</span>
-                  <div class="flex space-x-3">
-                     <button type="button" title="Rate 1 stars" aria-label="Rate 1 stars">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-10 h-10 text-yellow-500 dark:text-yellow-700 text-yellow-500 dark:text-yellow-700">
+                  <div class="flex space-x-3 flex-reverse">
+                     <input type="radio" id="r5" name="rating" class="d-none" value="5">
+                     <label type="button" for="r5" title="Rate 5 stars" aria-label="Rate 5 stars">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-10 h-10 dark:text-gray-400 dark:text-gray-400">
                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                         </svg>
-                     </button>
-                     <button type="button" title="Rate 2 stars" aria-label="Rate 2 stars">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-10 h-10 text-yellow-500 dark:text-yellow-700 text-yellow-500 dark:text-yellow-700">
+                     </label>
+                     <input type="radio" id="r4" name="rating" class="d-none" value="4">
+                     <label type="button" for="r4" title="Rate 4 stars" aria-label="Rate 4 stars">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-10 h-10 dark:text-gray-400 dark:text-gray-400">
                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                         </svg>
-                     </button>
-                     <button type="button" title="Rate 3 stars" aria-label="Rate 3 stars">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-10 h-10 text-yellow-500 dark:text-yellow-700 text-yellow-500 dark:text-yellow-700">
+                     </label>
+                     <input type="radio" id="r3" name="rating" class="d-none" value="3">
+                     <label type="button" for="r3" title="Rate 3 stars" aria-label="Rate 3 stars">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-10 h-10 dark:text-gray-400 dark:text-gray-400">
                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                         </svg>
-                     </button>
-                     <button type="button" title="Rate 4 stars" aria-label="Rate 4 stars">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-10 h-10 text-yellow-500 dark:text-yellow-700 text-yellow-500 dark:text-yellow-700">
+                     </label>
+                     <input type="radio" id="r2" name="rating" class="d-none" value="2">
+                     <label type="button" for="r2" title="Rate 2 stars" aria-label="Rate 2 stars">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-10 h-10 dark:text-gray-400 dark:text-gray-400">
                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                         </svg>
-                     </button>
-                     <button type="button" title="Rate 5 stars" aria-label="Rate 5 stars">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-10 h-10 text-gray-600 dark:text-gray-400 text-gray-600 dark:text-gray-400">
+                     </label>
+                     <input type="radio" id="r1" name="rating" class="d-none" value="1">
+                     <label type="button" for="r1" title="Rate 1 stars" aria-label="Rate 1 stars">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-10 h-10 dark:text-gray-400 dark:text-gray-400">
                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                         </svg>
-                     </button>
+                     </label>
                   </div>
                </div>
                <div class="flex flex-col w-full">
-                  <input type="text" id="usr_mail" placeholder="Email..." class="bg-black p-4 resize-none outline-none border-bottom">
-                  <input type="text" id="usr_msg" placeholder="Message..." class="bg-black p-4 resize-none outline-none border-bottom">
-                  <button type="button" class="py-4 my-8 font-semibold rounded-md text-gray-900 dark:text-gray-50 text-gray-900 dark:text-gray-50 main-bg bts">Leave feedback</button>
+                  <input type="text" id="usr_mail" placeholder="Email..." class="bg-black p-4 resize-none outline-none border-bottom" required>
+                  <input type="text" id="usr_msg" placeholder="Message..." class="bg-black p-4 resize-none outline-none border-bottom" required>
+                  <button type="button" onclick="sendFeedback()" class="py-4 my-8 font-semibold rounded-md text-gray-900 dark:text-gray-50 text-gray-900 dark:text-gray-50 main-bg bts">Leave feedback</button>
                </div>
             </div>
          </div>
@@ -670,5 +689,62 @@
             </div>
          </footer>
       </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script type="text/javascript" src="emailjs.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+      <script>
+         $(document).ready(function() {
+			toastr.options = {
+				'closeButton': true,
+				'debug': false,
+				'newestOnTop': true,
+				'progressBar': false,
+				'positionClass': 'toast-top-right',
+				'preventDuplicates': false,
+				'showDuration': '1000',
+				'hideDuration': '1000',
+				'timeOut': '5000',
+				'extendedTimeOut': '1000',
+				'showEasing': 'swing',
+				'hideEasing': 'linear',
+				'showMethod': 'fadeIn',
+				'hideMethod': 'fadeOut',
+			}
+		});
+         function sendFeedback() {
+             const email = document.getElementById('usr_mail').value;
+             const message = document.getElementById('usr_msg').value;
+             const rating = document.querySelector('input[name="rating"]:checked');
+  
+            if (rating) {
+               if(!email == ""){
+                  if(!message == ""){
+                     const ratingValue = rating.value;
+                     emailjs.send("service_wtofc5o","template_kmt4ajj",{
+                        to_email: email,
+                        rating: ratingValue,
+                        message: message
+                     })
+                     .then((response) => {
+                        toastr.success('Thankyou for your feedback');
+                     })
+                     .catch((error) => {
+                        toastr.error('Something went wrong!')
+                     });
+                  }
+                  else{
+                     toastr.warning('Enter your message')
+                  }
+               }
+               else{
+                  toastr.warning('Enter your email')
+               }
+            } 
+            else {
+               toastr.warning('Drop your rating')
+            }
+         }
+      </script>
    </body>
 </html>
