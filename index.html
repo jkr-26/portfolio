@@ -3,16 +3,41 @@
       <meta charset="utf-8"/>
       <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
       <title>
-         Portfolio
+         Janakiraman
       </title>
       <script src="https://cdn.tailwindcss.com"></script>
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Playfair+Display:ital,wght@1,400;1,700&amp;display=swap" rel="stylesheet"/>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Caveat:wght@400..700&family=Moirai+One&family=Rubik+Scribble&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
       <style>
          body {
          font-family: 'Inter', sans-serif;
          background-color: #0a0a0a;
          color: #ffffff;
+         }
+         .audiowide-regular {
+            font-family: "Audiowide", serif;
+            font-weight: 400;
+         }
+         .caveat {
+            font-family: "Caveat", serif;
+            font-optical-sizing: auto;
+            font-style: normal;
+         }
+         .tangerine-regular {
+            font-family: "Tangerine", serif;
+            font-weight: 400;
+            font-style: normal;
+         }
+         .rubik-scribble-regular {
+            font-family: "Rubik Scribble", serif;
+            font-weight: 400;
+            font-style: normal;
+         }
+
+
+         .multiply-blend{
+            mix-blend-mode: soft-light;
          }
          .whl{
          width: 80%;
@@ -23,6 +48,9 @@
          .boxvel{
             box-shadow: rgba(50, 50, 93, 0.54) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.53) 0px 18px 36px -18px inset;
             border: 1px solid rgba(50, 50, 93, 0.54);
+         }
+         .boxvel-1{
+            box-shadow: rgba(50, 50, 93, 0.54) 165px 64px 180px -12px inset;
          }
          .main-bg{
             background-color: rgba(50, 50, 93, 0.54);
@@ -36,6 +64,16 @@
          }
          .intro-glimpse{
             animation: scroll 30s linear infinite alternate-reverse;
+         }
+         .intro-glimpse::before{
+            content:'';
+            position: absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background: rgb(0,0,0);
+            background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 70%, rgba(0,0,0,1) 100%); 
          }
          @keyframes scroll {
             0% {
@@ -60,10 +98,10 @@
             <div class="flex items-center space-x-4">
                <img alt="Profile picture" class="rounded-full" height="50" src="profile.jpeg" width="50"/>
                <div>
-                  <h1 class="text-xl font-bold">
+                  <h1 class="text-xl font-bold audiowide-regular">
                      Hey, I'm Janakiraman.
                   </h1>
-                  <p class="text-gray-400">
+                  <p class="text-gray-400 audiowide-regular">
                      Full-Stack Developer
                   </p>
                </div>
@@ -81,7 +119,7 @@
             </p>
          </div>
          <section class="dark:text-gray-800 my-5">
-            <div class="container p-6 mx-auto space-y-6 text-center lg:p-8 lg:space-y-8 overflow-hidden">
+            <div class="container p-6 mx-auto space-y-6 text-center lg:p-8 lg:space-y-8 overflow-hidden relative">
                <div class="flex flex-nowrap justify-center lg:justify-between gap-10 intro-glimpse">
                   <span title="HTML">
                      <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -330,17 +368,12 @@
             </div>
          </section>
          <!-- What makes me different Section -->
-         <div class="bg-gray-900 p-6 rounded-lg mb-8">
+         <div class="boxvel-1 rounded-lg mb-8">
             <div class="flex flex-col md:flex-row items-center">
-               <img alt="Decorative image of Mika" class="rounded-lg mb-4 md:mb-0 md:mr-4" height="100" src="img/profile.jpeg" width="100"/>
+               <img alt="profile" class="multiply-blend rounded-lg mb-4 md:mb-0 md:mr-4" height="300" src="img/profile.png" width="300"/>
                <div>
-                  <h2 class="text-3xl md:text-4xl font-bold playfair">
-                     What makes me
-                     <span class="italic">
-                     different?
-                     </span>
-                  </h2>
-                  <p class="text-gray-400 mt-4">
+                  <h2 class="text-3xl md:text-6xl font-bold rubik-scribble-regular"><span class="text-3xl md:text-8xl">W</span>hat makes me different?</h2>
+                  <p class="text-gray-400 mt-4 md:text-1xl audiowide-regular">
                      I create unique digital experiences tailored to your brand and goals. By merging creativity with functionality and staying ahead of design trends, I ensure every project not only looks stunning but also performs flawlessly.
                   </p>
                   <a class="bg-gray-800 text-white px-4 py-2 rounded-lg mt-4 inline-block" href="#">
@@ -350,42 +383,162 @@
             </div>
          </div>
          <!-- Projects Section -->
-         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            <div class="bg-gray-900 p-6 rounded-lg">
-               <img alt="Project image for Conversion" class="rounded-lg mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/iulpvLSFaOo9EhdHxKXyFSfKQogLuap9q3Gvd9xKKEQere6nA.jpg" width="300"/>
-               <h3 class="text-xl font-bold">
-                  Conversion
-               </h3>
-               <p class="text-gray-400">
-                  Website for a digital marketing &amp; paid advertising agency.
-               </p>
+         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div class="rounded-md shadow-md sm:w-96 dark:bg-gray-50 dark:text-gray-800">
+               <div class="flex items-center justify-between p-3">
+                  <div class="flex items-center space-x-2">
+                     <img src="https://source.unsplash.com/50x50/?portrait" alt="" class="object-cover object-center w-8 h-8 rounded-full shadow-sm dark:bg-gray-500 dark:border-gray-300">
+                     <div class="-space-y-1">
+                        <h2 class="text-sm font-semibold leading-none my-2">leroy_jenkins72</h2>
+                        <span class="block text-xs leading-none dark:text-gray-600">Somewhere</span>
+                     </div>
+                  </div>
+                  <button title="Open options" type="button">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 h-5 fill-current">
+                        <path d="M256,144a64,64,0,1,0-64-64A64.072,64.072,0,0,0,256,144Zm0-96a32,32,0,1,1-32,32A32.036,32.036,0,0,1,256,48Z"></path>
+                        <path d="M256,368a64,64,0,1,0,64,64A64.072,64.072,0,0,0,256,368Zm0,96a32,32,0,1,1,32-32A32.036,32.036,0,0,1,256,464Z"></path>
+                        <path d="M256,192a64,64,0,1,0,64,64A64.072,64.072,0,0,0,256,192Zm0,96a32,32,0,1,1,32-32A32.036,32.036,0,0,1,256,288Z"></path>
+                     </svg>
+                  </button>
+               </div>
+               <img src="https://source.unsplash.com/301x301/?random" alt="" class="object-cover object-center w-full h-72 dark:bg-gray-500">
+               <div class="p-3">
+                  <div class="space-y-3">
+                     <p class="text-sm">
+                        <span class="text-base font-semibold">leroy_jenkins72 </span>Nemo ea quasi debitis impedit!
+                     </p>
+                  </div>
+               </div>
             </div>
-            <div class="bg-gray-900 p-6 rounded-lg">
-               <img alt="Project image for Scalable" class="rounded-lg mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/FaDFAGHaw4oLFNuUcmOrl51L2fu7mGc1iGY9Ne6XdHDHse6nA.jpg" width="300"/>
-               <h3 class="text-xl font-bold">
-                  Scalable
-               </h3>
-               <p class="text-gray-400">
-                  Landing Page for an analytics &amp; sales SaaS business.
-               </p>
+            <div class="rounded-md shadow-md sm:w-96 dark:bg-gray-50 dark:text-gray-800">
+               <div class="flex items-center justify-between p-3">
+                  <div class="flex items-center space-x-2">
+                     <img src="https://source.unsplash.com/50x50/?portrait" alt="" class="object-cover object-center w-8 h-8 rounded-full shadow-sm dark:bg-gray-500 dark:border-gray-300">
+                     <div class="-space-y-1">
+                        <h2 class="text-sm font-semibold leading-none my-2">leroy_jenkins72</h2>
+                        <span class="block text-xs leading-none dark:text-gray-600">Somewhere</span>
+                     </div>
+                  </div>
+                  <button title="Open options" type="button">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 h-5 fill-current">
+                        <path d="M256,144a64,64,0,1,0-64-64A64.072,64.072,0,0,0,256,144Zm0-96a32,32,0,1,1-32,32A32.036,32.036,0,0,1,256,48Z"></path>
+                        <path d="M256,368a64,64,0,1,0,64,64A64.072,64.072,0,0,0,256,368Zm0,96a32,32,0,1,1,32-32A32.036,32.036,0,0,1,256,464Z"></path>
+                        <path d="M256,192a64,64,0,1,0,64,64A64.072,64.072,0,0,0,256,192Zm0,96a32,32,0,1,1,32-32A32.036,32.036,0,0,1,256,288Z"></path>
+                     </svg>
+                  </button>
+               </div>
+               <img src="https://source.unsplash.com/301x301/?random" alt="" class="object-cover object-center w-full h-72 dark:bg-gray-500">
+               <div class="p-3">
+                  <div class="space-y-3">
+                     <p class="text-sm">
+                        <span class="text-base font-semibold">leroy_jenkins72 </span>Nemo ea quasi debitis impedit!
+                     </p>
+                  </div>
+               </div>
             </div>
-            <div class="bg-gray-900 p-6 rounded-lg">
-               <img alt="Project image for Limitless" class="rounded-lg mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/k6YZp2EUpZJGEh1NZnX5rSiPLBDI8Yf0FPcnozwjnTtAWveTA.jpg" width="300"/>
-               <h3 class="text-xl font-bold">
-                  Limitless
-               </h3>
-               <p class="text-gray-400">
-                  Landing page for a design subscription service.
-               </p>
+            <div class="rounded-md shadow-md sm:w-96 dark:bg-gray-50 dark:text-gray-800">
+               <div class="flex items-center justify-between p-3">
+                  <div class="flex items-center space-x-2">
+                     <img src="https://source.unsplash.com/50x50/?portrait" alt="" class="object-cover object-center w-8 h-8 rounded-full shadow-sm dark:bg-gray-500 dark:border-gray-300">
+                     <div class="-space-y-1">
+                        <h2 class="text-sm font-semibold leading-none my-2">leroy_jenkins72</h2>
+                        <span class="block text-xs leading-none dark:text-gray-600">Somewhere</span>
+                     </div>
+                  </div>
+                  <button title="Open options" type="button">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 h-5 fill-current">
+                        <path d="M256,144a64,64,0,1,0-64-64A64.072,64.072,0,0,0,256,144Zm0-96a32,32,0,1,1-32,32A32.036,32.036,0,0,1,256,48Z"></path>
+                        <path d="M256,368a64,64,0,1,0,64,64A64.072,64.072,0,0,0,256,368Zm0,96a32,32,0,1,1,32-32A32.036,32.036,0,0,1,256,464Z"></path>
+                        <path d="M256,192a64,64,0,1,0,64,64A64.072,64.072,0,0,0,256,192Zm0,96a32,32,0,1,1,32-32A32.036,32.036,0,0,1,256,288Z"></path>
+                     </svg>
+                  </button>
+               </div>
+               <img src="https://source.unsplash.com/301x301/?random" alt="" class="object-cover object-center w-full h-72 dark:bg-gray-500">
+               <div class="p-3">
+                  <div class="space-y-3">
+                     <p class="text-sm">
+                        <span class="text-base font-semibold">leroy_jenkins72 </span>Nemo ea quasi debitis impedit!
+                     </p>
+                  </div>
+               </div>
             </div>
-            <div class="bg-gray-900 p-6 rounded-lg">
-               <img alt="Project image for Solopreneur" class="rounded-lg mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/qx6qdcBHZTZcCxC2BJnfCg7aoBs6fsSFYi6KCJeZuiP8X96nA.jpg" width="300"/>
-               <h3 class="text-xl font-bold">
-                  Solopreneur
-               </h3>
-               <p class="text-gray-400">
-                  Website for a freelance web designer &amp; digital creator.
-               </p>
+            <div class="rounded-md shadow-md sm:w-96 dark:bg-gray-50 dark:text-gray-800">
+               <div class="flex items-center justify-between p-3">
+                  <div class="flex items-center space-x-2">
+                     <img src="https://source.unsplash.com/50x50/?portrait" alt="" class="object-cover object-center w-8 h-8 rounded-full shadow-sm dark:bg-gray-500 dark:border-gray-300">
+                     <div class="-space-y-1">
+                        <h2 class="text-sm font-semibold leading-none my-2">leroy_jenkins72</h2>
+                        <span class="block text-xs leading-none dark:text-gray-600">Somewhere</span>
+                     </div>
+                  </div>
+                  <button title="Open options" type="button">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 h-5 fill-current">
+                        <path d="M256,144a64,64,0,1,0-64-64A64.072,64.072,0,0,0,256,144Zm0-96a32,32,0,1,1-32,32A32.036,32.036,0,0,1,256,48Z"></path>
+                        <path d="M256,368a64,64,0,1,0,64,64A64.072,64.072,0,0,0,256,368Zm0,96a32,32,0,1,1,32-32A32.036,32.036,0,0,1,256,464Z"></path>
+                        <path d="M256,192a64,64,0,1,0,64,64A64.072,64.072,0,0,0,256,192Zm0,96a32,32,0,1,1,32-32A32.036,32.036,0,0,1,256,288Z"></path>
+                     </svg>
+                  </button>
+               </div>
+               <img src="https://source.unsplash.com/301x301/?random" alt="" class="object-cover object-center w-full h-72 dark:bg-gray-500">
+               <div class="p-3">
+                  <div class="space-y-3">
+                     <p class="text-sm">
+                        <span class="text-base font-semibold">leroy_jenkins72 </span>Nemo ea quasi debitis impedit!
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <div class="rounded-md shadow-md sm:w-96 dark:bg-gray-50 dark:text-gray-800">
+               <div class="flex items-center justify-between p-3">
+                  <div class="flex items-center space-x-2">
+                     <img src="https://source.unsplash.com/50x50/?portrait" alt="" class="object-cover object-center w-8 h-8 rounded-full shadow-sm dark:bg-gray-500 dark:border-gray-300">
+                     <div class="-space-y-1">
+                        <h2 class="text-sm font-semibold leading-none my-2">leroy_jenkins72</h2>
+                        <span class="block text-xs leading-none dark:text-gray-600">Somewhere</span>
+                     </div>
+                  </div>
+                  <button title="Open options" type="button">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 h-5 fill-current">
+                        <path d="M256,144a64,64,0,1,0-64-64A64.072,64.072,0,0,0,256,144Zm0-96a32,32,0,1,1-32,32A32.036,32.036,0,0,1,256,48Z"></path>
+                        <path d="M256,368a64,64,0,1,0,64,64A64.072,64.072,0,0,0,256,368Zm0,96a32,32,0,1,1,32-32A32.036,32.036,0,0,1,256,464Z"></path>
+                        <path d="M256,192a64,64,0,1,0,64,64A64.072,64.072,0,0,0,256,192Zm0,96a32,32,0,1,1,32-32A32.036,32.036,0,0,1,256,288Z"></path>
+                     </svg>
+                  </button>
+               </div>
+               <img src="https://source.unsplash.com/301x301/?random" alt="" class="object-cover object-center w-full h-72 dark:bg-gray-500">
+               <div class="p-3">
+                  <div class="space-y-3">
+                     <p class="text-sm">
+                        <span class="text-base font-semibold">leroy_jenkins72 </span>Nemo ea quasi debitis impedit!
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <div class="rounded-md shadow-md sm:w-96 dark:bg-gray-50 dark:text-gray-800">
+               <div class="flex items-center justify-between p-3">
+                  <div class="flex items-center space-x-2">
+                     <img src="https://source.unsplash.com/50x50/?portrait" alt="" class="object-cover object-center w-8 h-8 rounded-full shadow-sm dark:bg-gray-500 dark:border-gray-300">
+                     <div class="-space-y-1">
+                        <h2 class="text-sm font-semibold leading-none my-2">leroy_jenkins72</h2>
+                        <span class="block text-xs leading-none dark:text-gray-600">Somewhere</span>
+                     </div>
+                  </div>
+                  <button title="Open options" type="button">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 h-5 fill-current">
+                        <path d="M256,144a64,64,0,1,0-64-64A64.072,64.072,0,0,0,256,144Zm0-96a32,32,0,1,1-32,32A32.036,32.036,0,0,1,256,48Z"></path>
+                        <path d="M256,368a64,64,0,1,0,64,64A64.072,64.072,0,0,0,256,368Zm0,96a32,32,0,1,1,32-32A32.036,32.036,0,0,1,256,464Z"></path>
+                        <path d="M256,192a64,64,0,1,0,64,64A64.072,64.072,0,0,0,256,192Zm0,96a32,32,0,1,1,32-32A32.036,32.036,0,0,1,256,288Z"></path>
+                     </svg>
+                  </button>
+               </div>
+               <img src="https://source.unsplash.com/301x301/?random" alt="" class="object-cover object-center w-full h-72 dark:bg-gray-500">
+               <div class="p-3">
+                  <div class="space-y-3">
+                     <p class="text-sm">
+                        <span class="text-base font-semibold">leroy_jenkins72 </span>Nemo ea quasi debitis impedit!
+                     </p>
+                  </div>
+               </div>
             </div>
          </div>
          <!-- How I can help you Section -->
@@ -491,26 +644,31 @@
             </div>
          </div>
 
-         <!-- Footer Section -->
-         <div class="text-center mb-8">
-            <h2 class="text-xl font-bold">
-               Clientele
-            </h2>
-            <p class="text-gray-400">
-               December 22, 2024 - 16:02
-            </p>
-            <p class="text-gray-400">
-               Local time in London, United Kingdom
-            </p>
-         </div>
-         <div class="text-center">
-            <a class="text-gray-400 hover:text-white" href="#">
-            Use Template
-            </a>
-            <p class="text-gray-400 mt-2">
-               Proudly Built in Framer - Created by Hamza Ehsan
-            </p>
-         </div>
+         <footer class="px-4 py-8 mt-20  dark:text-gray-600">
+            <div class="container flex flex-wrap items-center justify-center mx-auto space-y-4 sm:justify-between sm:space-y-0">
+               <div class="flex flex-row pr-3 space-x-4 sm:space-x-8">
+                  <ul class="flex flex-wrap items-center space-x-4 sm:space-x-8">
+                     <li>
+                        <a rel="noopener noreferrer" href="#">Terms of Use</a>
+                     </li>
+                     <li>
+                        <a rel="noopener noreferrer" href="#">Privacy</a>
+                     </li>
+                  </ul>
+               </div>
+               <ul class="flex flex-wrap pl-3 space-x-4 sm:space-x-8">
+                  <li>
+                     <a rel="noopener noreferrer">Debug me on</a>
+                  </li>
+                  <li>
+                     <a rel="noopener noreferrer" href="#">Instagram</a>
+                  </li>
+                  <li>
+                     <a rel="noopener noreferrer" href="#">LinkedIn</a>
+                  </li>
+               </ul>
+            </div>
+         </footer>
       </div>
    </body>
 </html>
