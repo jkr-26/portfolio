@@ -7,17 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Janakiraman Portfolio</title>
 
-  <!-- 
-    - favicon
-  -->
+  <!-- favicon -->
   <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml">
 
   <style>
     :root {
 
-  /**
-   * colors
-   */
+  /* colors */
 
   --raw-seinna: hsl(24, 74%, 58%);
   --sizzling-sunrise: hsl(51, 95%, 54%);
@@ -25,14 +21,11 @@
   --black: hsl(0, 0%, 0%);
   --white: hsl(0, 0%, 100%);
 
-  /**
-   * typography
-   */
+  /* typography */
 
   --ff-saira-stencil-one: "Saira Stencil One", sans-serif; 
   --ff-poppins: 'Poppins', sans-serif;
   --ff-roboto: 'Roboto', sans-serif;
-
   --fs-1: 2rem;
   --fs-2: calc(1.813rem + 1vw);
   --fs-3: calc(1.313rem + 1vw);
@@ -40,25 +33,18 @@
   --fs-5: 1rem;
   --fs-6: 0.813rem;
   --fs-7: 0.75rem;
-
   --fw-400: 400;
   --fw-700: 700;
 
-  /**
-   * transition
-   */
+  /* transition */
 
   --transition-1: 0.25s ease-in-out;
 
-  /**
-   * spacing
-   */
+  /* spacing */
 
   --section-padding: 80px;
 
-  /**
-   * radius
-   */
+  /* radius */
 
   --radius-4: 4px;
   --radius-12: 12px;
@@ -593,24 +579,23 @@ main { overflow-x: hidden; }
   box-shadow: var(--shadow-1);
   z-index: 1;
 }
-
+  :root {
+    --before-position: 5px;
+    --before-width: 95px;
+  }
 .skills-toggle::before {
   content: "";
   position: absolute;
   top: 5px;
-  left: 5px;
+  left: var(--before-position);
   bottom: 5px;
-  width: 93px;
+  width: var(--before-width);
   background: var(--raw-seinna);
   border-radius: 100px;
   transition: var(--transition-1);
   z-index: -1;
 }
 
-.skills-toggle.active::before {
-  left: 98px;
-  width: 94px;
-}
 
 .toggle-btn {
   color: var(--color-primary);
@@ -625,7 +610,7 @@ main { overflow-x: hidden; }
 .skills-box .tools-list { display: none; }
 
 .skills-box .skills-list,
-.skills-box.active .tools-list {
+.tools-list,.extra-skills-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -854,13 +839,6 @@ textarea.input-field {
 }
 
 
-
-
-
-/*-----------------------------------*\
- * #FOOTER
-\*-----------------------------------*/
-
 .footer {
   background: var(--bg-secondary);
   padding-block: 20px;
@@ -880,13 +858,6 @@ textarea.input-field {
   color: var(--raw-seinna);
 }
 
-
-
-
-
-/*-----------------------------------*\
- * #GO TO TOP
-\*-----------------------------------*/
 
 .go-top {
   position: fixed;
@@ -913,23 +884,11 @@ textarea.input-field {
   transform: translateY(0);
 }
 
-
-
-
-
-/*-----------------------------------*\
- * #MEDIA QUERIES
-\*-----------------------------------*/
-
-/**
- * responsive for larger than 550px screen
- */
+/* responsive for larger than 550px screen */
 
 @media (min-width: 550px) {
 
-  /**
-   * REUSED STYLE
-   */
+  /* REUSED STYLE */
 
   .container {
     max-width: 550px;
@@ -940,9 +899,7 @@ textarea.input-field {
 
 
 
-  /**
-   * PROJECT
-   */
+  /* PROJECT */
 
   .project-list {
     column-count: 2;
@@ -953,19 +910,11 @@ textarea.input-field {
 
 }
 
-
-
-
-
-/**
- * responsive for larger than 768px screen
- */
+/* responsive for larger than 768px screen */
 
 @media (min-width: 768px) {
 
-  /**
-   * REUSED STYLE
-   */
+  /* REUSED STYLE */
 
   .container { max-width: 720px; }
 
@@ -973,17 +922,13 @@ textarea.input-field {
 
 
 
-  /**
-   * STATS
-   */
+  /* STATS */
 
   .stats-list { grid-template-columns: 1fr 1fr; }
 
 
 
-  /**
-   * ABOUT
-   */
+  /* ABOUT */
 
   .btn-group {
     display: flex;
@@ -997,10 +942,7 @@ textarea.input-field {
   .about .btn-secondary { margin-bottom: 0; }
 
 
-
-  /**
-   * CONTACT
-   */
+  /* CONTACT */
 
   .contact-form {
     max-width: 450px;
@@ -1010,30 +952,19 @@ textarea.input-field {
 }
 
 
-
-
-
-/**
- * responsive for larger than 992px screen
- */
+/* responsive for larger than 992px screen */
 
 @media (min-width: 992px) {
 
-  /**
-   * CUSTOM PROPERTY
-   */
+  /* CUSTOM PROPERTY */
 
   :root {
 
-    /**
-     * typography
-     */
+    /* typography */
 
     --fs-2: 3rem;
 
-    /**
-     * spacing
-     */
+    /* spacing */
 
     --section-padding: 100px;
 
@@ -1041,9 +972,7 @@ textarea.input-field {
 
 
 
-  /**
-   * REUSED STYLE
-   */
+  /* REUSED STYLE */
 
   .container { max-width: 980px; }
 
@@ -1069,9 +998,7 @@ textarea.input-field {
 
 
 
-  /**
-   * HEADER
-   */
+  /* HEADER */
 
   .header { padding-block: 30px; }
 
@@ -1109,9 +1036,7 @@ textarea.input-field {
 
 
 
-  /**
-   * HERO
-   */
+  /* HERO */
 
   .hero {
     position: relative;
@@ -1206,9 +1131,7 @@ textarea.input-field {
 
 
 
-  /**
-   * STATS
-   */
+  /* STATS */
 
   .stats-list { grid-template-columns: repeat(3, 1fr); }
 
@@ -1217,9 +1140,7 @@ textarea.input-field {
 
 
 
-  /**
-   * ABOUT
-   */
+  /* ABOUT */
 
   .about {
     display: grid;
@@ -1233,9 +1154,7 @@ textarea.input-field {
 
 
 
-  /**
-   * SKILLS
-   */
+  /* SKILLS */
 
   .skills {
     display: grid;
@@ -1250,9 +1169,7 @@ textarea.input-field {
 
 
 
-  /**
-   * PROJECT
-   */
+  /* PROJECT */
 
   .project-list { column-count: 3; }
 
@@ -1264,9 +1181,7 @@ textarea.input-field {
 
 
 
-  /**
-   * CONTACT
-   */
+  /* CONTACT */
 
   .contact {
     display: grid;
@@ -1282,9 +1197,7 @@ textarea.input-field {
 
 
 
-  /**
-   * FOOTER
-   */
+  /* FOOTER */
 
   .footer .container {
     display: flex;
@@ -1296,19 +1209,11 @@ textarea.input-field {
 
 }
 
-
-
-
-
-/**
- * responsive for larger than 1200px screen
- */
+/* responsive for larger than 1200px screen */
 
 @media (min-width: 1200px) {
 
-  /**
-   * REUSED STYLE
-   */
+  /* REUSED STYLE */
 
   .container { max-width: 1150px; }
 
@@ -1317,9 +1222,7 @@ textarea.input-field {
 
 
 
-  /**
-   * HERO
-   */
+  /* HERO */
 
   .hero-social-list { left: -80px; }
 
@@ -1328,13 +1231,14 @@ textarea.input-field {
 
 
 
-  /**
-   * ABOUT
-   */
+  /* ABOUT */
 
   .about-banner { max-width: 450px; }
 
+
+  
 }
+
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1447,9 +1351,6 @@ textarea.input-field {
       </section>
 
 
-
-
-
       <!-- #STATS -->
 
       <section class="stats" id="stats">
@@ -1506,10 +1407,6 @@ textarea.input-field {
         </ul>
       </section>
 
-
-
-
-
       <!-- #ABOUT -->
 
       <section class="about" id="about">
@@ -1529,10 +1426,6 @@ textarea.input-field {
         </div>
       </section>
 
-
-
-
-
       <!-- #SKILLS -->
 
       <section class="skills" id="skills">
@@ -1547,7 +1440,6 @@ textarea.input-field {
 
           <div class="skills-toggle" data-toggle-box>
             <button class="toggle-btn active" data-toggle-btn>Skills</button>
-
             <button class="toggle-btn" data-toggle-btn>Tools</button>
             <button class="toggle-btn" data-toggle-btn>Technics</button>
           </div>
@@ -1804,17 +1696,46 @@ textarea.input-field {
 
           </ul>
 
+          <ul class="extra-skills-list" style="display: none;"> <!-- New List for Extra Skills -->
+            <li>
+                <div class="skill-card">
+                    <div class="tooltip">Node.js</div>
+                    <div class="card-icon">
+                        <img src="images/nodejs.png" alt="Node.js logo">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="skill-card">
+                    <div class="tooltip">GraphQL</div>
+                    <div class="card-icon">
+                        <img src="images/graphql.png" alt="GraphQL logo">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="skill-card">
+                    <div class="tooltip">Docker</div>
+                    <div class="card-icon">
+                        <img src="images/docker.png" alt="Docker logo">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="skill-card">
+                    <div class="tooltip">AWS</div>
+                    <div class="card-icon">
+                        <img src="images/aws.png" alt="AWS logo">
+                    </div>
+                </div>
+            </li>
+          </ul>
+
         </div>
 
       </section>
 
-
-
-
-
-      <!-- 
-        - #PROJECTS
-      -->
+      <!--  #PROJECTS -->
 
       <section class="project" id="portfolio">
 
@@ -1960,14 +1881,7 @@ textarea.input-field {
         </ul>
 
       </section>
-
-
-
-
-
-      <!-- 
-        - #CONTACT
-      -->
+      <!--  #CONTACT -->
 
       <section class="contact" id="contact">
 
@@ -2127,13 +2041,7 @@ textarea.input-field {
     </article>
   </main>
 
-
-
-
-
-  <!-- 
-    - #FOOTER
-  -->
+  <!--  #FOOTER -->
 
   <footer class="footer">
     <div class="container">
@@ -2149,13 +2057,7 @@ textarea.input-field {
     </div>
   </footer>
 
-
-
-
-
-  <!-- 
-    - #GO TO TOP
-  -->
+  <!-- #GO TO TOP -->
 
   <a href="#top" class="go-top" data-go-top title="Go to Top">
     <ion-icon name="arrow-up"></ion-icon>
@@ -2165,23 +2067,15 @@ textarea.input-field {
 
 
 
-  <!-- 
-    - custom js link
-  -->
+  <!-- custom js link -->
   <script>
  'use strict';
 
-/**
- * element toggle function
- */
+/** element toggle function **/
 
 const elemToggleFunc = function (elem) { elem.classList.toggle("active"); }
 
-
-
-/**
- * header sticky & go to top
- */
+/** header sticky & go to top **/
 
 const header = document.querySelector("[data-header]");
 const goTopBtn = document.querySelector("[data-go-top]");
@@ -2200,9 +2094,7 @@ window.addEventListener("scroll", function () {
 
 
 
-/**
- * navbar toggle
- */
+/** navbar toggle **/
 
 const navToggleBtn = document.querySelector("[data-nav-toggle-btn]");
 const navbar = document.querySelector("[data-navbar]");
@@ -2217,29 +2109,41 @@ navToggleBtn.addEventListener("click", function () {
 
 
 
-/**
- * skills toggle
- */
+/** skills toggle **/
 
+/** skills toggle **/
 const toggleBtnBox = document.querySelector("[data-toggle-box]");
 const toggleBtns = document.querySelectorAll("[data-toggle-btn]");
 const skillsBox = document.querySelector("[data-skills-box]");
+const extraSkillsList = document.querySelector(".extra-skills-list"); // New list for extra skills
 
 for (let i = 0; i < toggleBtns.length; i++) {
-  toggleBtns[i].addEventListener("click", function () {
+    toggleBtns[i].addEventListener("click", function () {
+        
+        // Hide all lists initially
+        const skillLists = [skillsBox.querySelector(".skills-list"), skillsBox.querySelector(".tools-list"), extraSkillsList];
+        skillLists.forEach(list => list.style.display = "none");
 
-    elemToggleFunc(toggleBtnBox);
-    for (let i = 0; i < toggleBtns.length; i++) { elemToggleFunc(toggleBtns[i]); }
-    elemToggleFunc(skillsBox);
-
-  });
+        // Show the appropriate list based on the button clicked
+        if (toggleBtns[i].textContent === "Skills") {
+            skillsBox.querySelector(".skills-list").style.display = "flex"; // Show skills
+            document.documentElement.style.setProperty('--before-width', '95px');
+            document.documentElement.style.setProperty('--before-position', '5px');
+        } else if (toggleBtns[i].textContent === "Tools") {
+            skillsBox.querySelector(".tools-list").style.display = "flex"; // Show tools
+            document.documentElement.style.setProperty('--before-width', '94px');
+            document.documentElement.style.setProperty('--before-position', '98px');
+        } else if (toggleBtns[i].textContent === "Technics") {
+            extraSkillsList.style.display = "flex"; // Show extra skills
+            document.documentElement.style.setProperty('--before-width', '115px');
+            document.documentElement.style.setProperty('--before-position', '200px');
+        }
+    });
 }
 
 
 
-/**
- * dark & light theme toggle
- */
+/** dark & light theme toggle **/
 
 const themeToggleBtn = document.querySelector("[data-theme-btn]");
 
@@ -2261,9 +2165,7 @@ themeToggleBtn.addEventListener("click", function () {
 
 });
 
-/**
- * check & apply last time selected theme from localStorage
- */
+/** check & apply last time selected theme from localStorage **/
 
 if (localStorage.getItem("theme") === "light_theme") {
   themeToggleBtn.classList.add("active");
