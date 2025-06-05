@@ -9,6 +9,7 @@
 
   <!-- favicon -->
   <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
   <style>
     :root {
@@ -2186,7 +2187,61 @@ if (!document.body.innerText.includes("Janakiraman")) {
 }
     
   </script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
+      <script>
+         $(document).ready(function() {
+			toastr.options = {
+				'closeButton': true,
+				'debug': false,
+				'newestOnTop': true,
+				'progressBar': false,
+				'positionClass': 'toast-top-right',
+				'preventDuplicates': false,
+				'showDuration': '1000',
+				'hideDuration': '1000',
+				'timeOut': '5000',
+				'extendedTimeOut': '1000',
+				'showEasing': 'swing',
+				'hideEasing': 'linear',
+				'showMethod': 'fadeIn',
+				'hideMethod': 'fadeOut',
+			}
+		});
+         function sendFeedback() {
+             const email = document.getElementById('usr_mail').value;
+             const message = document.getElementById('usr_msg').value;
+             const rating = document.querySelector('input[name="rating"]:checked');
+  
+            if (rating) {
+               if(!email == ""){
+                  if(!message == ""){
+                     const ratingValue = rating.value;
+                     emailjs.send("service_wtofc5o","template_kmt4ajj",{
+                        to_email: email,
+                        rating: ratingValue,
+                        message: message
+                     })
+                     .then((response) => {
+                        toastr.success('Thankyou for your feedback');
+                     })
+                     .catch((error) => {
+                        toastr.error('Something went wrong!')
+                     });
+                  }
+                  else{
+                     toastr.warning('Enter your message')
+                  }
+               }
+               else{
+                  toastr.warning('Enter your email')
+               }
+            } 
+            else {
+               toastr.warning('Drop your rating')
+            }
+         }
+      </script>
   <!-- ionicon link -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
