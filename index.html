@@ -652,8 +652,20 @@
             </a>
           </li>
 
+          <li class="template" style="display: none;" aria-label="template">
+            <a href="#" class="project-card">
+              <figure class="card-banner">
+                <img src="" class="w-100" alt="">
+              </figure>
+              <div class="card-content">
+                <h3 class="h4 card-title"></h3>
+                <time class="publish-date" datetime=""></time>
+              </div>
+            </a>
+          </li>
+
           <li>
-            <button class="load-more">Load more work</button>
+            <button class="load-more" id="addmore" >Load more work</button>
           </li>
 
         </ul>
@@ -831,6 +843,27 @@
 
 
 <!-- custom js link -->
+<script id="projectdata" type="application/json">
+[
+  {
+    "title": "Project Alpha",
+    "date": "2022-01",
+    "dateLabel": "January 2022",
+    "image": "images/project-1.png",
+    "alt": "Project Alpha preview"
+  },
+  {
+    "title": "Project Beta",
+    "date": "2022-02",
+    "dateLabel": "February 2022",
+    "image": "images/project-2.png",
+    "alt": "Project Beta preview"
+  }
+]
+</script>
+
+
 <script src="js/jkr.js"></script>
+
 </body>
 </html>

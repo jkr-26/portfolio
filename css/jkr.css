@@ -695,6 +695,10 @@ main {
 	padding-block: var(--section-padding);
 }
 
+.project-list {
+	column-count: 2;
+	column-gap: 10px;
+}
 .project-list>li {
 	margin-bottom: 25px;
 }
@@ -734,7 +738,7 @@ main {
 .project-card :is(.card-title, .publish-date) {
 	background: var(--bg-primary);
 	padding: 6px 12px;
-	width: max-content;
+	width: auto;
 	box-shadow: var(--shadow-1);
 	transform: translateY(20px);
 	opacity: 0;
@@ -767,23 +771,6 @@ main {
 /*-----------------------------------*\
  * #CONTACT
 \*-----------------------------------*/
-
-
-/* .contact-form{
-  position: relative;
-}
-.contact-form::after{
-  content: '';
-  position: absolute;
-  top: -162px;
-  left: 6px;
-  background-image: url(images/form.png);
-  background-size: cover;
-  width: 200px;
-  height: 250px;
-  z-index: 1;
-  filter: contrast(1);
-} */
 .contact {
 	padding-block: var(--section-padding);
 }

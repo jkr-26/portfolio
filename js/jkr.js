@@ -205,37 +205,6 @@ if (!document.body.innerText.includes("Janakiraman")) {
         }
     });
 
-
-// var headings = document.querySelectorAll(".singleAni");
-// gsap.registerPlugin(ScrollTrigger);
-
-// headings.forEach((head) => {
-//   var chars = head.textContent.split("");
-
-//   // Replace text with span-wrapped characters (skip spaces)
-//   head.innerHTML = chars.map(char =>
-//     char === " " ? "&nbsp;" : `<i class="char" style="display:inline-block;white-space: pre;font-style:normal;">${char}</i>`
-//   ).join("");
-
-//   // Select chars inside this specific heading
-//   const charsInHead = head.querySelectorAll(".char");
-
-//   // Animate characters for this heading only
-//   gsap.from(charsInHead, {
-//     scrollTrigger: {
-//       trigger: head, // use the current heading
-//       start: "top 80%",
-//       toggleActions: "play none none none"
-//     },
-//     y: 20,
-//     autoAlpha: 0,
-//     stagger: 0.05,
-//     duration: 0.5,
-//     ease: "power2.out"
-//   });
-// });
-
-
   gsap.registerPlugin(ScrollTrigger);
 
   document.querySelectorAll(".singleAni").forEach((head) => {
@@ -301,3 +270,39 @@ $(".highlightOnScroll").each(function () {
       ease: "power2.out"
     });
 });
+
+
+// clone project
+
+let projectsAppended = false; // flag to prevent duplicates
+
+document.getElementById("addmore").addEventListener("click", function () {
+  if (projectsAppended) return; // prevent re-adding
+
+  const data = JSON.parse($('#projectdata').html());
+
+  data.forEach(project => {
+    let $clone = $('.template').clone();
+
+    $clone.find('.card-title').text(project.title);
+    $clone.find('.publish-date')
+      .attr('datetime', project.date)
+      .text(project.dateLabel);
+    $clone.find('img')
+      .attr('src', project.image)
+      .attr('alt', project.alt);
+
+    $clone.removeClass('template').show();
+
+    const $list = $('.project-list');
+    const $items = $list.children('li:not(.template)');
+    if ($items.length > 0) {
+      $items.last().before($clone);
+    } else {
+      $list.append($clone);
+    }
+  });
+
+  projectsAppended = true; // mark as done
+});
+
