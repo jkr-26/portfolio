@@ -171,36 +171,8 @@ if (!document.body.innerText.includes("Janakiraman")) {
             .catch((error) => {
                 toastr.error('Something went wrong!')
             });
-            // this.reset();
+            this.reset();
         }
-
-        // if (!uname === "") {
-        //     if(!email == ""){
-        //         if(!message == ""){
-        //             alert("Thank you for your feedback");
-        //             emailjs.send("service_wtofc5o","template_kmt4ajj",{
-        //             user_email: email,
-        //             user_name: name,
-        //             message: message
-        //             })
-        //             .then((response) => {
-        //             toastr.success('Thankyou for your feedback');
-        //             })
-        //             .catch((error) => {
-        //             toastr.error('Something went wrong!')
-        //             });
-        //         }
-        //         else{
-        //             toastr.warning('Enter your message')
-        //         }
-        //     }
-        //     else{
-        //         toastr.warning('Enter your email')
-        //     }
-        // } 
-        // else {
-        //     toastr.warning('Enter your Name')
-        // }
 
     });
 
