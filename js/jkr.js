@@ -171,7 +171,7 @@ if (!document.body.innerText.includes("Janakiraman")) {
             .catch((error) => {
                 toastr.error('Something went wrong!')
             });
-            this.reset();
+            // this.reset();
         }
 
     });
@@ -204,3 +204,100 @@ if (!document.body.innerText.includes("Janakiraman")) {
             }
         }
     });
+
+
+// var headings = document.querySelectorAll(".singleAni");
+// gsap.registerPlugin(ScrollTrigger);
+
+// headings.forEach((head) => {
+//   var chars = head.textContent.split("");
+
+//   // Replace text with span-wrapped characters (skip spaces)
+//   head.innerHTML = chars.map(char =>
+//     char === " " ? "&nbsp;" : `<i class="char" style="display:inline-block;white-space: pre;font-style:normal;">${char}</i>`
+//   ).join("");
+
+//   // Select chars inside this specific heading
+//   const charsInHead = head.querySelectorAll(".char");
+
+//   // Animate characters for this heading only
+//   gsap.from(charsInHead, {
+//     scrollTrigger: {
+//       trigger: head, // use the current heading
+//       start: "top 80%",
+//       toggleActions: "play none none none"
+//     },
+//     y: 20,
+//     autoAlpha: 0,
+//     stagger: 0.05,
+//     duration: 0.5,
+//     ease: "power2.out"
+//   });
+// });
+
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.querySelectorAll(".singleAni").forEach((head) => {
+    const words = head.textContent.trim().split(" ");
+
+    // Step 1: Wrap each word in a span with class 'paraani'
+    head.innerHTML = words.map(word => {
+      // Step 2: Inside each word, split characters and wrap in spans with class 'char'
+      const chars = word.split("").map(char =>
+        `<span class="char">${char}</span>`
+      ).join("");
+      return `<span class="paraani">${chars}</span>`;
+    }).join(" ");
+
+    // Animate all .char elements inside this heading
+    const charsInHead = head.querySelectorAll(".char");
+
+    gsap.from(charsInHead, {
+      scrollTrigger: {
+        trigger: head,
+        start: "top 80%",
+        toggleActions: "play none none none"
+      },
+      y: 30,
+      opacity: 0,
+      stagger: 0.03,
+      duration: 0.4,
+      ease: "power2.out"
+    });
+  });
+
+
+  // typing animation 
+
+$(".highlightOnScroll").each(function () {
+    const $el = $(this);
+    const text = $el.text().trim();
+    const words = text.split(" ");
+
+    $el.empty(); // Clear original text
+
+    words.forEach(word => {
+      const $wordSpan = $('<span class="typword"></span>');
+      [...word].forEach(char => {
+        const $char = $('<span class="typchar"></span>').text(char);
+        $wordSpan.append($char);
+      });
+      $el.append($wordSpan).append(" "); // Keep space between words
+    });
+
+    // Animate characters when scrolled into view
+    gsap.to($el.find(".typchar"), {
+      scrollTrigger: {
+        trigger: $el[0],
+        start: "top 80%",
+        toggleActions: "play none none none"
+      },
+      y: 0,
+      opacity: 1,
+      color: "var(--color-secondary)",
+      stagger: 0.005,
+      duration: 0.2,
+      ease: "power2.out"
+    });
+});

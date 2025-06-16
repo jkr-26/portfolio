@@ -511,7 +511,9 @@ main {
 	display: grid;
 	gap: 30px;
 }
-
+.stats-list li{
+	margin:20px auto;
+}
 .stats-card {
 	background: var(--bg-secondary);
 	display: flex;
@@ -1356,3 +1358,31 @@ textarea.input-field {
 		max-width: 450px;
 	}
 }
+
+.paraani {
+	display: inline-block;
+	flex-wrap: wrap;
+	margin-right: 0.2em;
+	white-space: nowrap;
+}
+.char {
+	display: inline-block;
+	font-style: normal;
+	white-space: pre;
+	margin: 0!important;
+}
+
+/*typing animation*/
+.typword {
+	display: inline-block;
+	margin-right: 0.25em;
+	white-space: nowrap;
+}
+
+.typchar {
+	display: inline-block;
+	color: #ccc;
+	opacity: 0.6;
+}
+
+
