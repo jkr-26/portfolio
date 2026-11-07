@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="en" id="dino-jkr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <title>Dino JKR</title>
+
+    <style>
+        :root {
+            --bg: #fff4e8;
+            --ink: #3b1f0b;
+            --sky: #ffe0bd;
+            --card: #ffffff;
+            --mut: #7a4b25;
+            --acc: #ff7a00;
+            color-scheme: light;
+        }
+        .accent {
+            color: var(--acc);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family:
+                "Bricolage Grotesque",
+                system-ui,
+                -apple-system,
+                "Segoe UI",
+                sans-serif;
+            line-height: 1.5;
+        }
+
+        main {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px 16px 40px;
+        }
+
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 800;
+            margin: 0 0 4px;
+            letter-spacing: -0.02em;
+        }
+
+        div.sub {
+            margin: 0 0 16px;
+            color: var(--mut);
+        }
+        div.sub  img, div.sub p {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .hud {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .hud span:last-child {
+            color: var(--mut);
+            font-weight: 400;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            background: var(--sky);
+            touch-action: manipulation;
+            cursor: pointer;
+            outline-offset: 3px;
+        }
+
+        canvas:focus-visible {
+            outline: 3px solid var(--acc);
+        }
+
+        .hint {
+            color: var(--mut);
+            font-size: 0.9rem;
+            margin: 8px 0 0;
+        }
+
+        /* Game Loader */
+        #skillRunnerLoader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: grid;
+            place-items: center;
+            background: var(--bg);
+            color: var(--ink);
+            transition:
+                opacity 0.45s ease,
+                visibility 0.45s ease;
+        }
+
+        #skillRunnerLoader.loaded {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .skill-runner-loader-inner {
+            width: min(320px, calc(100vw - 40px));
+            text-align: center;
+        }
+
+        .skill-runner-loader-spinner {
+            width: 54px;
+            height: 54px;
+            margin: 0 auto 18px;
+            border: 5px solid rgba(255, 122, 0, 0.18);
+            border-top-color: var(--acc);
+            border-radius: 50%;
+            animation: skillRunnerLoaderSpin 0.8s linear infinite;
+        }
+
+        .skill-runner-loader-title {
+            font-weight: 800;
+            font-size: 1.15rem;
+            margin-bottom: 14px;
+        }
+
+        .skill-runner-loader-bar {
+            height: 7px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: rgba(255, 122, 0, 0.15);
+        }
+
+        .skill-runner-loader-bar span {
+            display: block;
+            width: 0;
+            height: 100%;
+            border-radius: inherit;
+            background: var(--acc);
+            animation: skillRunnerLoaderProgress 1.5s ease forwards;
+        }
+
+        .skill-runner-loader-percent {
+            margin-top: 8px;
+            color: var(--mut);
+            font-size: 0.85rem;
+        }
+
+        @keyframes skillRunnerLoaderSpin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes skillRunnerLoaderProgress {
+            0% {
+                width: 0;
+            }
+
+            70% {
+                width: 78%;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .skill-runner-loader-spinner,
+            .skill-runner-loader-bar span {
+                animation: none;
+            }
+
+            .skill-runner-loader-bar span {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Loader -->
+    <div id="skillRunnerLoader" aria-label="Loading game">
+        <div class="skill-runner-loader-inner">
+
+            <div class="skill-runner-loader-spinner"></div>
+
+            <div class="skill-runner-loader-title">
+                Loading Dino JKR...
+            </div>
+
+            <div class="skill-runner-loader-bar">
+                <span></span>
+            </div>
+
+            <div class="skill-runner-loader-percent">
+                0%
+            </div>
+
+        </div>
+    </div>
+
+    <main>
+
+        <h1>Dino JKR</h1>
+
+        <div class="sub">
+          <img src="assets/img/avatars/relax.png" width="60px">
+          <p>Every barrier is one of my skills.Jump over them all to finish the run.<br>Double Tap and <span class="accent">wakeup me</span> before Starting the Game</p>
+        </div>
+
+        <div class="hud">
+            <span id="skillRunnerScore">
+                Cleared 0 / 0
+            </span>
+
+            <span id="skillRunnerStatus">
+                Press Space or tap the game to start
+            </span>
+            
+        </div>
+
+        <canvas
+            id="skillRunnerCanvas"
+            width="900"
+            height="280"
+            tabindex="0"
+            aria-label="Skill runner game. Press space or tap to jump."
+        ></canvas>
+
+        <p class="hint">
+            Jump: Space, ↑ or tap.
+            Hold your timing; the game speeds up as you clear more skills.
+        </p>
+
+    </main>
+
+    <script>
+        (() => {
+
+            "use strict";
+
+            /* =========================================================
+               GAME DATA
+            ========================================================= */
+
+            const skillRunnerData = [
+
+                [
+                    "Frontend",
+                    "#2563eb",
+                    "🌐|HTML5;🎨|CSS3;⚡|JavaScript;🎞️|GSAP;💲|jQuery;🅱️|Bootstrap 5;🌬️|Tailwind CSS;⚛️|React.js;🚀|Vite;📱|Responsive Design"
+                ],
+
+                [
+                    "Backend",
+                    "#16a34a",
+                    "🐘|PHP;🐍|Python;🟢|Node.js;🖥️|Server-Side Programming;🔁|CRUD Operations"
+                ],
+
+                [
+                    "Databases",
+                    "#9333ea",
+                    "🐬|MySQL;🍃|MongoDB;🗃️|SQL;🛠️|phpMyAdmin;📐|Database Design;⏱️|Query Optimization"
+                ],
+
+                [
+                    "Frameworks",
+                    "#dc2626",
+                    "🚂|Express.js;🟩|Vue.js;🔴|Laravel;🧪|Flask;🎸|Django"
+                ],
+
+                [
+                    "APIs & Integration",
+                    "#0891b2",
+                    "🔌|REST APIs;🧩|Third-Party APIs;🔄|AJAX;📡|Fetch API;📦|JSON;💳|Payment Gateway;📧|Email Integration;📬|SMTP"
+                ],
+
+                [
+                    "Web Infrastructure",
+                    "#ea580c",
+                    "🎛️|cPanel;📮|Webmail;🧭|DNS;🏷️|Domain Management;🔒|SSL/TLS;☁️|Cloudflare;🚢|Deployment;🔧|Hosting Maintenance"
+                ],
+
+                [
+                    "CMS & Platforms",
+                    "#be185d",
+                    "📝|WordPress;🎯|Webflow;🖌️|Theme Customization;🔗|Plugin Integration;🗂️|Website Management"
+                ],
+
+                [
+                    "SEO & Analytics",
+                    "#4d7c0f",
+                    "🔎|Search Console;📊|Analytics 4;🧷|Tag Manager;🗺️|XML Sitemaps;🤖|robots.txt;🏎️|PageSpeed Insights;🏮|Lighthouse;📍|Business Profile;🛰️|Technical SEO"
+                ],
+
+                [
+                    "Tools",
+                    "#475569",
+                    "🌿|Git;🐙|GitHub;💻|VS Code;🐞|PyCharm;🧱|WAMP Server;✏️|Figma"
+                ]
+
+            ];
+
+
+            /* =========================================================
+               SKILL COLLECTION
+            ========================================================= */
+
+            const skillRunnerSkills = [];
+            const skillRunnerCategories = {};
+
+            skillRunnerData.forEach(
+                (
+                    [
+                        skillRunnerCategory,
+                        skillRunnerColor,
+                        skillRunnerSkillsText
+                    ]
+                ) => {
+
+                    skillRunnerCategories[skillRunnerCategory] = {
+                        color: skillRunnerColor,
+                        total: 0,
+                        completed: 0
+                    };
+
+                    skillRunnerSkillsText
+                        .split(";")
+                        .forEach(skillRunnerItem => {
+
+                            const [
+                                skillRunnerEmoji,
+                                skillRunnerName
+                            ] = skillRunnerItem.split("|");
+
+                            skillRunnerSkills.push({
+                                category: skillRunnerCategory,
+                                color: skillRunnerColor,
+                                emoji: skillRunnerEmoji,
+                                name: skillRunnerName
+                            });
+
+                            skillRunnerCategories[
+                                skillRunnerCategory
+                            ].total++;
+
+                        });
+
+                }
+            );
+
+
+            /* =========================================================
+               CANVAS
+            ========================================================= */
+
+            const skillRunnerCanvas =
+                document.getElementById("skillRunnerCanvas");
+
+            const skillRunnerContext =
+                skillRunnerCanvas.getContext("2d");
+
+            const skillRunnerWidth = 900;
+            const skillRunnerHeight = 280;
+
+            const skillRunnerGroundY = 232;
+
+            const skillRunnerBoyX = 100;
+            const skillRunnerBoyWidth = 34;
+            const skillRunnerBoyHeight = 58;
+
+            const skillRunnerGravity = 0.8;
+            const skillRunnerJumpVelocity = 15.5;
+
+            const skillRunnerDevicePixelRatio =
+                Math.min(window.devicePixelRatio || 1, 2);
+
+            skillRunnerCanvas.width =
+                skillRunnerWidth * skillRunnerDevicePixelRatio;
+
+            skillRunnerCanvas.height =
+                skillRunnerHeight * skillRunnerDevicePixelRatio;
+
+            skillRunnerContext.setTransform(
+                skillRunnerDevicePixelRatio,
+                0,
+                0,
+                skillRunnerDevicePixelRatio,
+                0,
+                0
+            );
+
+            const skillRunnerFont =
+                '"Bricolage Grotesque", system-ui, sans-serif';
+
+
+            /* =========================================================
+               THEME
+            ========================================================= */
+
+            let skillRunnerTheme = {};
+
+            function skillRunnerApplyTheme() {
+
+                const skillRunnerComputedStyle =
+                    getComputedStyle(
+                        document.documentElement
+                    );
+
+                skillRunnerTheme.sky =
+                    skillRunnerComputedStyle
+                        .getPropertyValue("--sky")
+                        .trim();
+
+                skillRunnerTheme.ink =
+                    skillRunnerComputedStyle
+                        .getPropertyValue("--ink")
+                        .trim();
+
+                skillRunnerTheme.accent =
+                    skillRunnerComputedStyle
+                        .getPropertyValue("--acc")
+                        .trim();
+            }
+
+            skillRunnerApplyTheme();
+
+            if (
+                typeof matchMedia === "function"
+            ) {
+
+                matchMedia(
+                    "(prefers-color-scheme: dark)"
+                ).addEventListener(
+                    "change",
+                    skillRunnerApplyTheme
+                );
+
+            }
+
+
+            /* =========================================================
+               HUD ELEMENTS
+            ========================================================= */
+
+            const skillRunnerScoreElement =
+                document.getElementById(
+                    "skillRunnerScore"
+                );
+
+            const skillRunnerStatusElement =
+                document.getElementById(
+                    "skillRunnerStatus"
+                );
+
+
+            /* =========================================================
+               GAME STATE
+            ========================================================= */
+
+            let skillRunnerState = "idle";
+
+            let skillRunnerObstacles = [];
+
+            let skillRunnerObstacleIndex = 0;
+
+            let skillRunnerClearedCount = 0;
+
+            let skillRunnerSpeed = 6;
+
+            let skillRunnerDistance = 0;
+
+            let skillRunnerObstacleGap = 0;
+
+            let skillRunnerBoy = {
+                height: 0,
+                velocityY: 0
+            };
+
+            let skillRunnerGameOverTime = 0;
+
+            let skillRunnerLostObstacle = null;
+
+            let skillRunnerLastFrameTime = 0;
+
+
+            /* =========================================================
+               RESET GAME
+            ========================================================= */
+
+            function skillRunnerReset() {
+
+                skillRunnerObstacles = [];
+
+                skillRunnerObstacleIndex = 0;
+
+                skillRunnerClearedCount = 0;
+
+                skillRunnerSpeed = 6;
+
+                skillRunnerDistance = 0;
+
+                skillRunnerObstacleGap = 0;
+
+                skillRunnerBoy = {
+                    height: 0,
+                    velocityY: 0
+                };
+
+                skillRunnerLostObstacle = null;
+
+                skillRunnerUpdateHud();
+
+                skillRunnerStatusElement.textContent = "Go!";
+            }
+
+
+            /* =========================================================
+               HUD
+            ========================================================= */
+
+            function skillRunnerUpdateHud() {
+
+                skillRunnerScoreElement.textContent =
+                    `Cleared ${skillRunnerClearedCount} / ${skillRunnerSkills.length}`;
+
+            }
+
+
+            /* =========================================================
+               START / JUMP ACTION
+            ========================================================= */
+
+            function skillRunnerAction() {
+
+                if (skillRunnerState === "run") {
+
+                    if (
+                        skillRunnerBoy.height === 0
+                    ) {
+
+                        skillRunnerBoy.velocityY =
+                            skillRunnerJumpVelocity;
+
+                    }
+
+                }
+
+                else if (
+                    skillRunnerState === "idle" ||
+                    performance.now() -
+                    skillRunnerGameOverTime > 400
+                ) {
+
+                    skillRunnerReset();
+
+                    skillRunnerState = "run";
+
+                    skillRunnerBoy.velocityY =
+                        skillRunnerJumpVelocity;
+
+                }
+
+            }
+
+
+            /* =========================================================
+               KEYBOARD CONTROLS
+            ========================================================= */
+
+            window.addEventListener(
+                "keydown",
+                skillRunnerKeyboardHandler
+            );
+
+            function skillRunnerKeyboardHandler(
+                skillRunnerEvent
+            ) {
+
+                if (
+                    [
+                        "Space",
+                        "ArrowUp",
+                        "KeyW"
+                    ].includes(
+                        skillRunnerEvent.code
+                    )
+                ) {
+
+                    const skillRunnerTargetTag =
+                        skillRunnerEvent
+                            .target
+                            ?.tagName;
+
+                    if (
+                        skillRunnerTargetTag === "INPUT" ||
+                        skillRunnerTargetTag === "TEXTAREA"
+                    ) {
+                        return;
+                    }
+
+                    skillRunnerEvent.preventDefault();
+
+                    if (
+                        !skillRunnerEvent.repeat
+                    ) {
+
+                        skillRunnerAction();
+
+                    }
+
+                }
+
+            }
+
+
+            /* =========================================================
+               POINTER / TOUCH CONTROL
+            ========================================================= */
+
+            skillRunnerCanvas.addEventListener(
+                "pointerdown",
+                skillRunnerPointerHandler
+            );
+
+            function skillRunnerPointerHandler(
+                skillRunnerEvent
+            ) {
+
+                skillRunnerEvent.preventDefault();
+
+                skillRunnerAction();
+
+            }
+
+
+            /* =========================================================
+               UPDATE GAME
+            ========================================================= */
+
+            function skillRunnerUpdate(
+                skillRunnerDeltaTime
+            ) {
+
+                skillRunnerBoy.velocityY -=
+                    skillRunnerGravity *
+                    skillRunnerDeltaTime;
+
+                skillRunnerBoy.height +=
+                    skillRunnerBoy.velocityY *
+                    skillRunnerDeltaTime;
+
+
+                /* Ground collision */
+
+                if (
+                    skillRunnerBoy.height <= 0
+                ) {
+
+                    skillRunnerBoy.height = 0;
+
+                    skillRunnerBoy.velocityY = 0;
+
+                }
+
+
+                /* Increase game speed */
+
+                skillRunnerSpeed =
+                    Math.min(
+                        6 +
+                        skillRunnerClearedCount *
+                        0.07,
+                        10.5
+                    );
+
+
+                skillRunnerDistance +=
+                    skillRunnerSpeed *
+                    skillRunnerDeltaTime;
+
+
+                /* Last obstacle */
+
+                const skillRunnerLastObstacle =
+                    skillRunnerObstacles[
+                        skillRunnerObstacles.length - 1
+                    ];
+
+
+                /* Spawn next obstacle */
+
+                if (
+                    skillRunnerObstacleIndex <
+                    skillRunnerSkills.length &&
+                    (
+                        !skillRunnerLastObstacle ||
+                        skillRunnerWidth -
+                        skillRunnerLastObstacle.x >=
+                        skillRunnerObstacleGap
+                    )
+                ) {
+
+                    skillRunnerObstacles.push({
+
+                        ...skillRunnerSkills[
+                            skillRunnerObstacleIndex
+                        ],
+
+                        x: skillRunnerWidth + 20,
+
+                        width: 60,
+
+                        height:
+                            46 +
+                            (
+                                skillRunnerObstacleIndex *
+                                37
+                            ) % 26,
+
+                        completed: false
+
+                    });
+
+
+                    skillRunnerObstacleGap =
+                        310 +
+                        Math.random() * 130 +
+                        skillRunnerSpeed * 14;
+
+
+                    skillRunnerObstacleIndex++;
+
+                }
+
+
+                /* Player collision area */
+
+                const skillRunnerPlayerX =
+                    skillRunnerBoyX + 6;
+
+                const skillRunnerPlayerWidth =
+                    skillRunnerBoyWidth - 12;
+
+                const skillRunnerPlayerBottom =
+                    skillRunnerGroundY -
+                    skillRunnerBoy.height;
+
+
+                /* Update obstacles */
+
+                for (
+                    const skillRunnerObstacle
+                    of skillRunnerObstacles
+                ) {
+
+                    skillRunnerObstacle.x -=
+                        skillRunnerSpeed *
+                        skillRunnerDeltaTime;
+
+
+                    /* Collision */
+
+                    if (
+                        skillRunnerPlayerX <
+                        skillRunnerObstacle.x +
+                        skillRunnerObstacle.width &&
+
+                        skillRunnerPlayerX +
+                        skillRunnerPlayerWidth >
+                        skillRunnerObstacle.x &&
+
+                        skillRunnerPlayerBottom >
+                        skillRunnerGroundY -
+                        skillRunnerObstacle.height +
+                        4
+                    ) {
+
+                        skillRunnerState = "over";
+
+                        skillRunnerGameOverTime =
+                            performance.now();
+
+                        skillRunnerLostObstacle =
+                            skillRunnerObstacle;
+
+                        skillRunnerStatusElement.textContent =
+                            `Stopped by ${skillRunnerObstacle.name}. Press Space to retry.`;
+
+                        return;
+
+                    }
+
+
+                    /* Successfully cleared */
+
+                    if (
+                        !skillRunnerObstacle.completed &&
+                        skillRunnerObstacle.x +
+                        skillRunnerObstacle.width <
+                        skillRunnerBoyX
+                    ) {
+
+                        skillRunnerObstacle.completed =
+                            true;
+
+                        skillRunnerClearedCount++;
+
+                        skillRunnerUpdateHud();
+
+                        skillRunnerStatusElement.textContent =
+                            `Cleared ${skillRunnerObstacle.name}`;
+
+                    }
+
+                }
+
+
+                /* Remove old obstacles */
+
+                while (
+                    skillRunnerObstacles.length &&
+                    skillRunnerObstacles[0].x < -200
+                ) {
+
+                    skillRunnerObstacles.shift();
+
+                }
+
+
+                /* Win condition */
+
+                if (
+                    skillRunnerClearedCount ===
+                    skillRunnerSkills.length
+                ) {
+
+                    skillRunnerState = "win";
+
+                    skillRunnerGameOverTime =
+                        performance.now();
+
+                    skillRunnerStatusElement.textContent =
+                        "Run complete. Press Space to play again.";
+
+                }
+
+            }
+
+
+            /* =========================================================
+               DRAW PLAYER
+            ========================================================= */
+
+            function skillRunnerDrawBoy() {
+
+                const skillRunnerBoyFloor =
+                    skillRunnerGroundY -
+                    skillRunnerBoy.height;
+
+                const skillRunnerBoyPositionX =
+                    skillRunnerBoyX;
+
+                const skillRunnerIsAirborne =
+                    skillRunnerBoy.height > 0;
+
+                const skillRunnerAnimationPhase =
+                    Math.floor(
+                        skillRunnerDistance / 12
+                    ) % 2;
+
+
+                /* Legs */
+
+                skillRunnerContext.fillStyle =
+                    "#5b2c06";
+
+
+                if (
+                    skillRunnerIsAirborne
+                ) {
+
+                    skillRunnerContext.fillRect(
+                        skillRunnerBoyPositionX + 7,
+                        skillRunnerBoyFloor - 16,
+                        9,
+                        14
+                    );
+
+                    skillRunnerContext.fillRect(
+                        skillRunnerBoyPositionX + 19,
+                        skillRunnerBoyFloor - 20,
+                        9,
+                        14
+                    );
+
+                }
+
+                else {
+
+                    skillRunnerContext.fillRect(
+                        skillRunnerBoyPositionX + 7,
+                        skillRunnerBoyFloor -
+                        16 +
+                        (
+                            skillRunnerAnimationPhase
+                                ? 0
+                                : 5
+                        ),
+                        9,
+                        16 -
+                        (
+                            skillRunnerAnimationPhase
+                                ? 0
+                                : 5
+                        )
+                    );
+
+                    skillRunnerContext.fillRect(
+                        skillRunnerBoyPositionX + 19,
+                        skillRunnerBoyFloor -
+                        16 +
+                        (
+                            skillRunnerAnimationPhase
+                                ? 5
+                                : 0
+                        ),
+                        9,
+                        16 -
+                        (
+                            skillRunnerAnimationPhase
+                                ? 5
+                                : 0
+                        )
+                    );
+
+                }
+
+
+                /* Body */
+
+                skillRunnerContext.fillStyle =
+                    skillRunnerTheme.accent;
+
+                skillRunnerContext.beginPath();
+
+                skillRunnerContext.roundRect(
+                    skillRunnerBoyPositionX + 3,
+                    skillRunnerBoyFloor - 42,
+                    28,
+                    28,
+                    6
+                );
+
+                skillRunnerContext.fill();
+
+
+                /* Arm */
+
+                skillRunnerContext.strokeStyle =
+                    "#f2b78f";
+
+                skillRunnerContext.lineWidth = 5;
+
+                skillRunnerContext.lineCap =
+                    "round";
+
+                skillRunnerContext.beginPath();
+
+                skillRunnerContext.moveTo(
+                    skillRunnerBoyPositionX + 28,
+                    skillRunnerBoyFloor - 36
+                );
+
+                skillRunnerContext.lineTo(
+                    skillRunnerBoyPositionX + 38,
+                    skillRunnerBoyFloor -
+                    (
+                        skillRunnerIsAirborne
+                            ? 50
+                            : 30
+                    ) +
+                    (
+                        skillRunnerAnimationPhase
+                            ? 0
+                            : 4
+                    )
+                );
+
+                skillRunnerContext.stroke();
+
+
+                /* Face */
+
+                skillRunnerContext.fillStyle =
+                    "#f2b78f";
+
+                skillRunnerContext.beginPath();
+
+                skillRunnerContext.arc(
+                    skillRunnerBoyPositionX + 17,
+                    skillRunnerBoyFloor - 52,
+                    12,
+                    0,
+                    Math.PI * 2
+                );
+
+                skillRunnerContext.fill();
+
+
+                /* Hair */
+
+                skillRunnerContext.fillStyle =
+                    "#d95f00";
+
+                skillRunnerContext.beginPath();
+
+                skillRunnerContext.arc(
+                    skillRunnerBoyPositionX + 17,
+                    skillRunnerBoyFloor - 54,
+                    12.5,
+                    Math.PI,
+                    0
+                );
+
+                skillRunnerContext.fill();
+
+                skillRunnerContext.fillRect(
+                    skillRunnerBoyPositionX + 17,
+                    skillRunnerBoyFloor - 56,
+                    20,
+                    4
+                );
+
+
+                /* Eye */
+
+                skillRunnerContext.fillStyle =
+                    skillRunnerTheme.ink;
+
+                skillRunnerContext.beginPath();
+
+                skillRunnerContext.arc(
+                    skillRunnerBoyPositionX + 22,
+                    skillRunnerBoyFloor - 51,
+                    1.8,
+                    0,
+                    Math.PI * 2
+                );
+
+                skillRunnerContext.fill();
+
+            }
+
+
+            /* =========================================================
+               DRAW OBSTACLE
+            ========================================================= */
+
+            function skillRunnerDrawObstacle(
+                skillRunnerObstacle
+            ) {
+
+                const skillRunnerObstacleY =
+                    skillRunnerGroundY -
+                    skillRunnerObstacle.height;
+
+
+                /* Main obstacle */
+
+                skillRunnerContext.fillStyle =
+                    skillRunnerTheme.accent;
+
+                skillRunnerContext.beginPath();
+
+                skillRunnerContext.roundRect(
+                    skillRunnerObstacle.x,
+                    skillRunnerObstacleY,
+                    skillRunnerObstacle.width,
+                    skillRunnerObstacle.height,
+                    8
+                );
+
+                skillRunnerContext.fill();
+
+
+                /* Pattern */
+
+                skillRunnerContext.fillStyle =
+                    "rgba(255,255,255,.35)";
+
+                for (
+                    let skillRunnerPatternX = 0;
+                    skillRunnerPatternX <
+                    skillRunnerObstacle.width;
+                    skillRunnerPatternX += 16
+                ) {
+
+                    skillRunnerContext.beginPath();
+
+                    skillRunnerContext.moveTo(
+                        skillRunnerObstacle.x +
+                        skillRunnerPatternX,
+                        skillRunnerObstacleY
+                    );
+
+                    skillRunnerContext.lineTo(
+                        skillRunnerObstacle.x +
+                        skillRunnerPatternX +
+                        8,
+                        skillRunnerObstacleY
+                    );
+
+                    skillRunnerContext.lineTo(
+                        skillRunnerObstacle.x +
+                        skillRunnerPatternX,
+                        skillRunnerObstacleY +
+                        8
+                    );
+
+                    skillRunnerContext.closePath();
+
+                    skillRunnerContext.fill();
+
+                }
+
+
+                /* Emoji */
+
+                skillRunnerContext.font =
+                    "30px sans-serif";
+
+                skillRunnerContext.textAlign =
+                    "center";
+
+                skillRunnerContext.textBaseline =
+                    "middle";
+
+                skillRunnerContext.fillStyle =
+                    "#fff";
+
+                skillRunnerContext.fillText(
+                    skillRunnerObstacle.emoji,
+                    skillRunnerObstacle.x +
+                    skillRunnerObstacle.width / 2,
+                    skillRunnerObstacleY +
+                    skillRunnerObstacle.height / 2 +
+                    4
+                );
+
+
+                /* Skill name */
+
+                skillRunnerContext.font =
+                    `700 12px ${skillRunnerFont}`;
+
+                skillRunnerContext.textBaseline =
+                    "alphabetic";
+
+                skillRunnerContext.fillStyle =
+                    skillRunnerTheme.ink;
+
+                skillRunnerContext.fillText(
+                    skillRunnerObstacle.name,
+                    skillRunnerObstacle.x +
+                    skillRunnerObstacle.width / 2,
+                    skillRunnerObstacleY - 8
+                );
+
+            }
+
+
+            /* =========================================================
+               DRAW GAME
+            ========================================================= */
+
+            function skillRunnerDraw() {
+
+                skillRunnerContext.clearRect(
+                    0,
+                    0,
+                    skillRunnerWidth,
+                    skillRunnerHeight
+                );
+
+
+                /* Background */
+
+                skillRunnerContext.fillStyle =
+                    skillRunnerTheme.sky;
+
+                skillRunnerContext.fillRect(
+                    0,
+                    0,
+                    skillRunnerWidth,
+                    skillRunnerHeight
+                );
+
+
+                /* Ground */
+
+                skillRunnerContext.strokeStyle =
+                    skillRunnerTheme.ink;
+
+                skillRunnerContext.lineWidth = 2;
+
+                skillRunnerContext.beginPath();
+
+                skillRunnerContext.moveTo(
+                    0,
+                    skillRunnerGroundY
+                );
+
+                skillRunnerContext.lineTo(
+                    skillRunnerWidth,
+                    skillRunnerGroundY
+                );
+
+                skillRunnerContext.stroke();
+
+
+                /* Ground animation */
+
+                skillRunnerContext.globalAlpha = 0.35;
+
+                skillRunnerContext.lineWidth = 3;
+
+                for (
+                    let skillRunnerGroundIndex = -1;
+                    skillRunnerGroundIndex <
+                    skillRunnerWidth / 40 + 1;
+                    skillRunnerGroundIndex++
+                ) {
+
+                    const skillRunnerGroundX =
+                        skillRunnerGroundIndex * 40 -
+                        (
+                            skillRunnerDistance * 0.9
+                        ) % 40;
+
+                    const skillRunnerGroundYPosition =
+                        skillRunnerGroundY +
+                        12 +
+                        (
+                            skillRunnerGroundIndex % 3
+                        ) * 7;
+
+                    skillRunnerContext.beginPath();
+
+                    skillRunnerContext.moveTo(
+                        skillRunnerGroundX,
+                        skillRunnerGroundYPosition
+                    );
+
+                    skillRunnerContext.lineTo(
+                        skillRunnerGroundX + 14,
+                        skillRunnerGroundYPosition
+                    );
+
+                    skillRunnerContext.stroke();
+
+                }
+
+                skillRunnerContext.globalAlpha = 1;
+
+
+                /* Obstacles */
+
+                if (
+                    skillRunnerObstacles
+                ) {
+
+                    skillRunnerObstacles.forEach(
+                        skillRunnerDrawObstacle
+                    );
+
+                }
+
+
+                /* Player */
+
+                skillRunnerDrawBoy();
+
+
+                /* Text */
+
+                skillRunnerContext.fillStyle =
+                    skillRunnerTheme.ink;
+
+                skillRunnerContext.textAlign =
+                    "center";
+
+                skillRunnerContext.textBaseline =
+                    "alphabetic";
+
+
+                /* Idle */
+
+                if (
+                    skillRunnerState === "idle"
+                ) {
+
+                    skillRunnerContext.font =
+                        `800 26px ${skillRunnerFont}`;
+
+                    skillRunnerContext.fillText(
+                        "Press Space or tap to run",
+                        skillRunnerWidth / 2,
+                        110
+                    );
+
+                }
+
+
+                /* Game Over */
+
+                if (
+                    skillRunnerState === "over" &&
+                    skillRunnerLostObstacle
+                ) {
+
+                    skillRunnerContext.font =
+                        `800 26px ${skillRunnerFont}`;
+
+                    skillRunnerContext.fillText(
+                        `Stopped by ${skillRunnerLostObstacle.emoji} ${skillRunnerLostObstacle.name}`,
+                        skillRunnerWidth / 2,
+                        100
+                    );
+
+                    skillRunnerContext.font =
+                        `400 16px ${skillRunnerFont}`;
+
+                    skillRunnerContext.fillText(
+                        `Cleared ${skillRunnerClearedCount} of ${skillRunnerSkills.length}. Press Space to retry.`,
+                        skillRunnerWidth / 2,
+                        128
+                    );
+
+                }
+
+
+                /* Win */
+
+                if (
+                    skillRunnerState === "win"
+                ) {
+
+                    skillRunnerContext.font =
+                        `800 26px ${skillRunnerFont}`;
+
+                    skillRunnerContext.fillText(
+                        `All ${skillRunnerSkills.length} skills cleared`,
+                        skillRunnerWidth / 2,
+                        100
+                    );
+
+                    skillRunnerContext.font =
+                        `400 16px ${skillRunnerFont}`;
+
+                    skillRunnerContext.fillText(
+                        "Let's build something together. Press Space to replay.",
+                        skillRunnerWidth / 2,
+                        128
+                    );
+
+                }
+
+            }
+
+
+            /* =========================================================
+               GAME LOOP
+            ========================================================= */
+
+            function skillRunnerGameLoop(
+                skillRunnerTimestamp
+            ) {
+
+                const skillRunnerDeltaTime =
+                    Math.min(
+                        (
+                            skillRunnerTimestamp -
+                            skillRunnerLastFrameTime
+                        ) / 16.67 || 1,
+                        2.5
+                    );
+
+                skillRunnerLastFrameTime =
+                    skillRunnerTimestamp;
+
+
+                if (
+                    skillRunnerState === "run"
+                ) {
+
+                    skillRunnerUpdate(
+                        skillRunnerDeltaTime
+                    );
+
+                }
+
+
+                skillRunnerDraw();
+
+                requestAnimationFrame(
+                    skillRunnerGameLoop
+                );
+
+            }
+
+
+            /* =========================================================
+               INITIALIZE GAME
+            ========================================================= */
+
+            skillRunnerReset();
+
+            skillRunnerState = "idle";
+
+            skillRunnerStatusElement.textContent =
+                "Press Space or tap the game to start";
+
+
+            /* =========================================================
+               LOADER
+            ========================================================= */
+
+            const skillRunnerLoader =
+                document.getElementById(
+                    "skillRunnerLoader"
+                );
+
+            const skillRunnerLoaderPercent =
+                skillRunnerLoader.querySelector(
+                    ".skill-runner-loader-percent"
+                );
+
+            let skillRunnerLoaderProgress = 0;
+
+            const skillRunnerLoaderTimer =
+                setInterval(() => {
+
+                    skillRunnerLoaderProgress =
+                        Math.min(
+                            100,
+                            skillRunnerLoaderProgress +
+                            Math.floor(
+                                Math.random() * 12
+                            ) + 7
+                        );
+
+                    skillRunnerLoaderPercent.textContent =
+                        `${skillRunnerLoaderProgress}%`;
+
+
+                    if (
+                        skillRunnerLoaderProgress >= 100
+                    ) {
+
+                        clearInterval(
+                            skillRunnerLoaderTimer
+                        );
+
+                        setTimeout(() => {
+
+                            skillRunnerLoader.classList.add(
+                                "loaded"
+                            );
+
+                        }, 180);
+
+                    }
+
+                }, 110);
+
+
+            /* =========================================================
+               START ANIMATION
+            ========================================================= */
+
+            requestAnimationFrame(
+                skillRunnerGameLoop
+            );
+
+        })();
+    </script>
+
+</body>
+
+</html>

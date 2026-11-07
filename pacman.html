@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pac-Man</title>
+<link rel="stylesheet" href="css/pacman.css">
+</head>
+<body>
+<main class="pcx-shell">
+  <header class="pcx-hud">
+    <span>SCORE <b id="pcxScoreBox">0</b></span>
+    <span>HIGH <b id="pcxHighBox">0</b></span>
+    <span>LIVES <b id="pcxLivesBox">3</b></span>
+  </header>
+  <div class="pcx-board">
+    <canvas id="pcxStage" aria-label="Pac-Man game board"></canvas>
+    <div id="pcxBanner" class="pcx-banner">PAC-MAN<small>Press any key or tap to start<br>Arrows / WASD / swipe</small></div>
+  </div>
+  <nav class="pcx-pad" aria-label="Touch controls">
+    <button data-pcx-dir="up">▲</button>
+    <button data-pcx-dir="left">◀</button>
+    <button data-pcx-dir="down">▼</button>
+    <button data-pcx-dir="right">▶</button>
+  </nav>
+</main>
+<script src="js/pacman.js"></script>
+</body>
+</html>
