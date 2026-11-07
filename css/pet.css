@@ -1,0 +1,37 @@
+  .demo{max-width:620px;margin:80px auto;padding:0 20px;text-align:center}
+
+  /* ===== PET ===== */
+  #pet{position:fixed;bottom:0;left:0;width:80px;height:100px;z-index:99999;cursor:pointer;user-select:none;-webkit-user-select:none}
+  #pet .flip{width:100%;height:100%}
+  #pet .sprite{width:100%;height:100%;transform-origin:50% 100%}
+  #pet .sprite svg,#pet .sprite img{width:100%;height:100%;display:block;overflow:visible}
+  .shadow{position:absolute;bottom:-4px;left:18px;width:84px;height:12px;border-radius:50%;background:rgba(0,0,0,.15);z-index:-1}
+
+  .sprite.fall{animation:sway .35s ease-in-out infinite alternate}
+  @keyframes sway{from{transform:rotate(-8deg)}to{transform:rotate(8deg)}}
+  .sprite.squash{animation:squash .35s ease-out}
+  @keyframes squash{0%{transform:scale(1.35,.65)}60%{transform:scale(.92,1.1)}100%{transform:scale(1,1)}}
+  .sprite.lying{transform:translateY(25px) rotate(90deg);transform-origin:50% 50%}
+  .sprite.wobble{animation:wobble 1s ease-in-out infinite}
+  @keyframes wobble{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+  .sprite.walk{animation:bob .4s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  .sprite.jump{animation:jump .5s ease-out 3}
+  @keyframes jump{0%,100%{transform:translateY(0)}40%{transform:translateY(-28px) scale(.97,1.04)}}
+  .nod .head{animation:nod .6s ease-in-out 3;transform-origin:60px 92px}
+  @keyframes nod{0%,100%{transform:rotate(0)}50%{transform:rotate(14deg) translateY(4px)}}
+  .spin{animation:spin .5s linear infinite;transform-box:fill-box;transform-origin:center}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .stars{animation:spin 1.2s linear infinite;transform-origin:60px 14px}
+
+  /* ===== MESSAGE BOX ===== */
+  #bubble{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:12px;width:210px;
+    background:#606060;border:2.5px solid #4a3328;border-radius:16px;padding:10px 12px;text-align:center;
+    font-size:14px;line-height:1.35;box-shadow:0 6px 16px rgba(0,0,0,.18);display:none;cursor:default}
+  #bubble:after{content:"";position:absolute;top:100%;left:50%;margin-left:-9px;border:9px solid transparent;border-top-color:#4a3328}
+  #bubble:before{content:"";position:absolute;top:100%;left:50%;margin:-3px 0 0 -7px;border:7px solid transparent;border-top-color:#fff;z-index:1}
+  #bubble button{font:inherit;font-size:13px;margin:8px 3px 0;padding:5px 11px;border:2px solid #4a3328;border-radius:999px;background:#b0490e;cursor:pointer}
+  #bubble button:hover{transition:all .2s ease-in-out;transform:scale(1.05);}
+  #bubble button.alt{background:#eee;color:#4a3328;border-color:#4a3328}
+  #bubble .big{font-size:22px;padding:4px 10px}
+  #bubble a{display:inline-block;margin:8px 3px 0;padding:5px 11px;border:2px solid #4a3328;border-radius:999px;background:#eee;color:#4a3328;text-decoration:none;font-size:13px}
