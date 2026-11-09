@@ -707,5 +707,5 @@ document.addEventListener("keydown", function (event) {
 });
 
 const finaliseCount = document.querySelectorAll('[data-finalise="true"]').length;
-
-finaliseCount != 20 ? window.location.href = "https://jkr-26.github.io/portfolio/" : null;
+console.log(finaliseCount) 
+// finaliseCount != 20 ? window.location.href = "https://jkr-26.github.io/portfolio/" : null;
